@@ -40,16 +40,29 @@ UIController =  (function() {
 
 // Module GLOBAL APP CONTROLLER
 var controller = (function(budgetCtrl, UICtrl) {
-    
-    // retrieve DOMstrings from UI Controller 
-    var DOM = UICtrl.getDOMstrings();
 
+    // Function in which all event listeners are placed
+    var setupEventListeners = function() {
+
+        // retrieve DOMstrings from UI Controller 
+        var DOM = UICtrl.getDOMstrings();
+
+        document.querySelector(DOM.inputBtn).addEventListener('click',ctrlAddItem);
+        
+        document.addEventListener('keypress', function(event) {
+            if (event.keyCode === 13 || event.which === 13) {
+                ctrlAddItem();            
+            } 
+        });
+    };
+
+
+    // Function that gets call when we want to add a new item
     var ctrlAddItem = function(){
 
         // 1. Get the filled input data
         // UI controller is the module that we have access to
         var input = UICtrl.getInput();
-        console.log(input);
 
         // 2. Add the items into the budget controller
 
@@ -60,18 +73,20 @@ var controller = (function(budgetCtrl, UICtrl) {
 
         // 5. Display the budget on the UI
 
-
     };
 
-    document.querySelector(DOM.inputBtn).addEventListener('click',ctrlAddItem);
 
-    document.addEventListener('keypress', function(event) {
-
-        if (event.keyCode === 13 || event.which === 13) {
-            ctrlAddItem();            
-        } 
-
-    });
+    // A public initialization function (Running the app whenever we start the app)
+    // Our event listene will be setup as soon as we call the init function
+    // We need to do that outside the controller
+    return {
+        init: function() {
+            console.log('Application has started !');
+            setupEventListeners();
+        }
+    };
 
 
 })(budgetController, UIController);
+
+controller.init();
