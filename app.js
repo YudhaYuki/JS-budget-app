@@ -97,7 +97,7 @@ UIController =  (function() {
 
         addListItem: function(obj, type) {
 
-            var html, newHTML, element;
+            var html, newHtml, element;
             
             // Create HTML string with placeholder text
             if (type === 'inc') {
@@ -110,9 +110,9 @@ UIController =  (function() {
             }
 
             // Replace the placeholder text with some actual data
-            newHTML = html.replace('%id%', obj.id);
-            newHTML = newHTML.replace('%description%', obj.description);
-            newHTML = newHTML.replace('%value%', obj.value);       
+            newHtml = html.replace('%id%', obj.id);
+            newHtml = newHtml.replace('%description%', obj.description);
+            newHtml = newHtml.replace('%value%', obj.value);       
 
             // Insert the HTML into DOM
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
@@ -158,8 +158,8 @@ var controller = (function(budgetCtrl, UICtrl) {
         // 2. Add the items into the budget controller
         newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 
-
         // 3. Add item to the UI
+        UICtrl.addListItem(newItem, input.type);
 
         // 4. Calculate the budget
 
