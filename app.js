@@ -130,6 +130,9 @@ UIController =  (function() {
             fieldsArr.forEach(function(current, index, array) {
                 current.value = "";
             });
+
+            // Return the focus into the first field after clearing the input fields
+            fieldsArr[0].focus();
         },
 
         // Exposing the DOM strings object into the public
