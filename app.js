@@ -14,6 +14,23 @@ var budgetController = (function() {
         this.value = value;
     };
 
+    var calculateTotal = function(type) {
+        var sum = 0;
+
+        data.allItems[type].forEach(function(cur) {
+            sum += cur.value;
+        });
+        /*
+            0
+            [200, 400, 100]
+            sum = 0 + 200
+            sum = 200 + 400
+            sum = 600 + 100 = 700
+        */
+
+        data.totals[type] = sum;
+    };
+
     /* 
     var allExpenses;
     var allIncomes;
@@ -61,6 +78,18 @@ var budgetController = (function() {
 
             // Return the new element
             return newItem;
+        },
+
+        calculateBudget: function() {
+
+            // Calculate total income and expenses
+            calculateTotal('exp');
+            calculateTotal('inc');
+
+            // Calculate the budget: income - expenses
+
+            // Calculate the percentage of income that we spent 
+
         },
 
         // New method to access PRIVATE DATA structure (Just testing)
