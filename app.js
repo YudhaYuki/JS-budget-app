@@ -10,14 +10,28 @@ var budgetController = (function() {
 // Module UI CONTROLLER
 UIController =  (function() {
 
+    // Storing query string into variable/object, so when we change the name, we just have to change them here
+    var DOMstrings = {
+        inputType: '.add__type',
+        inputDescription: '.add__description',
+        inputValue: '.add__value',
+        inputBtn: '.add__btn'
+    };
+
     return {
         // Methhod to return all 3 input
         getInput: function() {
             return {
-                type : document.querySelector('.add__type').value, // Will be either inc or exp
-                description : document.querySelector('.add__description').value,
-                value : document.querySelector('.add__value').value
+                type : document.querySelector(DOMstrings.inputType).value, // Will be either inc or exp
+                description : document.querySelector(DOMstrings.inputDescription).value,
+                value : document.querySelector(DOMstrings.inputValue).value
             };
+        },
+
+        // Exposing the DOM strings object into the public
+
+        getDOMstrings: function() {
+            return DOMstrings;
         }
     };
 
@@ -26,6 +40,9 @@ UIController =  (function() {
 
 // Module GLOBAL APP CONTROLLER
 var controller = (function(budgetCtrl, UICtrl) {
+    
+    // retrieve DOMstrings from UI Controller 
+    var DOM = UICtrl.getDOMstrings();
 
     var ctrlAddItem = function(){
 
@@ -36,6 +53,7 @@ var controller = (function(budgetCtrl, UICtrl) {
 
         // 2. Add the items into the budget controller
 
+
         // 3. Add item to the UI
 
         // 4. Calculate the budget
@@ -45,7 +63,7 @@ var controller = (function(budgetCtrl, UICtrl) {
 
     };
 
-    document.querySelector('.add__btn').addEventListener('click',ctrlAddItem);
+    document.querySelector(DOM.inputBtn).addEventListener('click',ctrlAddItem);
 
     document.addEventListener('keypress', function(event) {
 
