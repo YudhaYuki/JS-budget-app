@@ -115,12 +115,14 @@ var controller = (function(budgetCtrl, UICtrl) {
 
     // Function that gets call when we want to add a new item
     var ctrlAddItem = function(){
+        var input, newItem;
 
         // 1. Get the filled input data
         // UI controller is the module that we have access to
-        var input = UICtrl.getInput();
+        input = UICtrl.getInput();
 
         // 2. Add the items into the budget controller
+        newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 
 
         // 3. Add item to the UI
