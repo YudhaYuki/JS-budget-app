@@ -10,7 +10,16 @@ var budgetController = (function() {
 // Module UI CONTROLLER
 UIController =  (function() {
 
-    // Some code
+    return {
+        // Methhod to return all 3 input
+        getInput: function() {
+            return {
+                type : document.querySelector('.add__type').value, // Will be either inc or exp
+                description : document.querySelector('.add__description').value,
+                value : document.querySelector('.add__value').value
+            };
+        }
+    };
 
 })();
 
@@ -21,6 +30,9 @@ var controller = (function(budgetCtrl, UICtrl) {
     var ctrlAddItem = function(){
 
         // 1. Get the filled input data
+        // UI controller is the module that we have access to
+        var input = UICtrl.getInput();
+        console.log(input);
 
         // 2. Add the items into the budget controller
 
@@ -30,7 +42,6 @@ var controller = (function(budgetCtrl, UICtrl) {
 
         // 5. Display the budget on the UI
 
-        console.log('It works !');
 
     };
 
