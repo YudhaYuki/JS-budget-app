@@ -37,6 +37,22 @@ var budgetController = (function() {
         }
     }
 
+    // Adding item, either INC or EXP
+    return {
+        addItem: function(type, des, val) {
+            var newItem, ID;
+
+            ID = 0;
+
+            if (type === 'exp') {
+                newItem = new Expense(ID, des, val);
+            } else if (type === 'inc') {
+                newItem = new Income(ID, des, val)
+            }
+
+        }
+    };
+
 })();
 
 // Module UI CONTROLLER
