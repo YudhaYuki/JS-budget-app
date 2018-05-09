@@ -14,6 +14,29 @@ var budgetController = (function() {
         this.value = value;
     };
 
+    /* 
+    var allExpenses;
+    var allIncomes;
+    var totalExpenses;
+
+    var data = {
+        allExpenses : [],
+        allIncomes : []
+    }
+    */
+
+    // Better way of creating data structures, ready to receive data.
+    var data = {
+        allItems: {
+            exp: [],
+            inc: []
+        },
+        totals: {
+            exp: 0,
+            inc: 0
+        }
+    }
+
 })();
 
 // Module UI CONTROLLER
