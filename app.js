@@ -179,18 +179,20 @@ var controller = (function(budgetCtrl, UICtrl) {
         // UI controller is the module that we have access to
         input = UICtrl.getInput();
 
-        // 2. Add the items into the budget controller
-        newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+        if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
 
-        // 3. Add item to the UI
-        UICtrl.addListItem(newItem, input.type);
-
-        // 4. Clear the fields
-        UICtrl.clearFields();
-
-        // 5. Calculate and update the budget
-        updateBudget();
-
+            // 2. Add the items into the budget controller
+            newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+            
+            // 3. Add item to the UI
+            UICtrl.addListItem(newItem, input.type);
+    
+            // 4. Clear the fields
+            UICtrl.clearFields();
+    
+            // 5. Calculate and update the budget
+            updateBudget();
+        }
 
     };
 
