@@ -52,7 +52,8 @@ var budgetController = (function() {
             exp: 0,
             inc: 0
         },
-        budget: 0
+        budget: 0,
+        percentage: -1
     }
 
     // Adding item, either INC or EXP
@@ -91,7 +92,17 @@ var budgetController = (function() {
             data.budget = data.totals.inc - data.totals.exp;
 
             // Calculate the percentage of income that we spent 
+            data.percentage = Math.round( (data.totals.exp / data.totals.inc) * 100 );
 
+        },
+
+        getBudget: function() {
+            return {
+                budget: data.budget,
+                totalInc: data.totals.inc,
+                totalExp: data.totals.exp,
+                percentage: data.percentage
+            };
         },
 
         // New method to access PRIVATE DATA structure (Just testing)
@@ -196,10 +207,13 @@ var controller = (function(budgetCtrl, UICtrl) {
     var updateBudget = function() {
 
         // 1. Calculate the budget
+        budgetCtrl.calculateBudget();
 
         // 2. Return the budget
+        var budget = budgetCtrl.getBudget();
 
         // 3. Display the budget on the UI
+        console.log(budget);
     };
 
     // Function that gets call when we want to add a new item
