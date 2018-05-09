@@ -118,8 +118,14 @@ UIController =  (function() {
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
         },
 
-        // Exposing the DOM strings object into the public
+        // Clearing our input fields after inputting any data
+        clearFields: function() {
+            var fields;
+            
+            fields = document.querySelectorAll(DOMstrings.inputDescription + ', ' + DOMstrings.inputValue);
+        },
 
+        // Exposing the DOM strings object into the public
         getDOMstrings: function() {
             return DOMstrings;
         }
