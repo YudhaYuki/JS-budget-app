@@ -187,6 +187,13 @@ UIController =  (function() {
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
         },
 
+        // DELETE ITEMS
+        deleteListItem: function(selectorID) {
+
+            var el = document.getElementById(selectorID);
+            el.parentNode.removeChild(el);
+        },
+
         // Clearing our input fields after inputting any data
         clearFields: function() {
             var fields, fieldsArr;
