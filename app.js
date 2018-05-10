@@ -145,7 +145,7 @@ var budgetController = (function() {
             */
             
             data.allItems.exp.forEach(function(cur) {
-                cur.calcPercentages();
+                cur.calcPercentages(data.totals.inc);
             });
         },
 
