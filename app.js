@@ -223,6 +223,13 @@ UIController =  (function() {
         return (type === 'exp' ? '-' : '+') + ' ' + int + '.' + dec;
     };
 
+    // Create our own forEach to covert nodeList into 
+    var nodeListForEach = function(list, callback) {
+        for (var i = 0; i < list.length; i++) {
+            callback(list[i], i);
+        }
+    };
+
 
     return {
         // Methhod to return all 3 input
@@ -302,13 +309,6 @@ UIController =  (function() {
             // This will return nodeList
             var fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
 
-            // Create our own forEach to covert nodeList into 
-            var nodeListForEach = function(list, callback) {
-                for (var i = 0; i < list.length; i++) {
-                    callback(list[i], i);
-                }
-            };
-
             nodeListForEach(fields, function(current, index) {
 
                 if (percentages[index] > 0) {
@@ -334,6 +334,18 @@ UIController =  (function() {
             document.querySelector(DOMstrings.dateLabel).textContent = months[month] + ' ' + year;
         },
 
+        changedType: function() {
+
+            var fields = document.querySelectorAll(
+                DOMstrings.inputType + ',' + 
+                DOMstrings.inputDescription + ',' +
+                DOMstrings.inputValue);
+
+            nodeListForEach(fields, function(cur) {
+                cur.classList.toggle('red-focus');
+            });
+            
+        },
 
         // Exposing the DOM strings object into the public
         getDOMstrings: function() {
@@ -363,6 +375,11 @@ var controller = (function(budgetCtrl, UICtrl) {
 
         // Event delegation
         document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
+
+        // Change color to red when EXP selected and blue when INC selected
+        document.querySelector(DOM.inputType).addEventListener('change', UICtrl.changedType);
+
+
     };
 
     var updateBudget = function() {
